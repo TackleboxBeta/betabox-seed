@@ -1,5 +1,9 @@
+#!/usr/bin/env node
+
 const prompt = require('prompt');
 const writeToEnvFile = require('./util').writeToEnvFile;
+
+console.log('<<< Database Configuration >>>');
 
 prompt.start();
 prompt.get([
