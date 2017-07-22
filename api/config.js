@@ -20,5 +20,20 @@ module.exports = {
       profileFields: ['id', 'displayName', 'photos', 'email', 'first_name', 'last_name', 'age_range'],
       accessTokenField: 'accessToken'
     }
+  },
+  aws: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+  }
+  mongo: {
+    uri: process.env.MONGO_URI,
+    options: {
+      db: {
+        safe: true
+      }
+    }
+  },
+  mandrill: {
+    apiKey: process.env.MANDRILL_API_KEY
   }
 };
