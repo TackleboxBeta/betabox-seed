@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { IndexLink } from 'react-router';
-import { LinkContainer } from 'react-router-bootstrap';
-import Navbar from 'react-bootstrap/lib/Navbar';
-import Nav from 'react-bootstrap/lib/Nav';
-import NavItem from 'react-bootstrap/lib/NavItem';
 import Alert from 'react-bootstrap/lib/Alert';
 import Helmet from 'react-helmet';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
-import { Notifs, InfoBar } from 'components';
+import { Notifs } from 'components';
 import { push } from 'react-router-redux';
 import config from 'config';
 import { asyncConnect } from 'redux-connect';
+
+import Header from 'components/Header/Header';
+import Footer from 'components/Footer/Footer';
 
 @asyncConnect([{
   promise: ({ store: { dispatch, getState } }) => {
@@ -40,7 +38,6 @@ export default class App extends Component {
     router: PropTypes.object.isRequired,
     user: PropTypes.object,
     notifs: PropTypes.object.isRequired,
-    logout: PropTypes.func.isRequired,
     pushState: PropTypes.func.isRequired
   };
 
@@ -63,107 +60,30 @@ export default class App extends Component {
     }
   }
 
-  handleLogout = event => {
-    event.preventDefault();
-    this.props.logout();
-  };
-
   render() {
     const { user, notifs, children } = this.props;
     const styles = require('./App.scss');
 
     return (
-      <div className={styles.app}>
+      <div className={styles.appContainer}>
         <Helmet {...config.app.head} />
-        <Navbar fixedTop>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <IndexLink to="/" activeStyle={{ color: '#33e0ff' }}>
-                <div className={styles.brand} />
-                <span>{config.app.title}</span>
-              </IndexLink>
-            </Navbar.Brand>
-            <Navbar.Toggle />
-          </Navbar.Header>
-
-          <Navbar.Collapse>
-            <Nav navbar>
-              {user && <LinkContainer to="/chatFeathers">
-                <NavItem>Chat with Feathers</NavItem>
-              </LinkContainer>}
-
-              <LinkContainer to="/chat">
-                <NavItem>Chat</NavItem>
-              </LinkContainer>
-              <LinkContainer to="/widgets">
-                <NavItem>Widgets</NavItem>
-              </LinkContainer>
-              <LinkContainer to="/survey">
-                <NavItem>Survey</NavItem>
-              </LinkContainer>
-              <LinkContainer to="/about">
-                <NavItem>About Us</NavItem>
-              </LinkContainer>
-
-              {!user && <LinkContainer to="/login">
-                <NavItem>Login</NavItem>
-              </LinkContainer>}
-              {!user && <LinkContainer to="/register">
-                <NavItem>Register</NavItem>
-              </LinkContainer>}
-              {user && <LinkContainer to="/logout">
-                <NavItem className="logout-link" onClick={this.handleLogout}>
-                  Logout
-                </NavItem>
-              </LinkContainer>}
-            </Nav>
-            {user && <p className="navbar-text">
-              Logged in as <strong>{user.email}</strong>.
-            </p>}
-            <Nav navbar pullRight>
-              <NavItem
-                target="_blank"
-                title="View on Github"
-                href="https://github.com/erikras/react-redux-universal-hot-example"
-              >
-                <i className="fa fa-github" />
-              </NavItem>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
+        <Header user={user} logout={logout} />
 
         <div className={styles.appContent}>
           {notifs.global && <div className="container">
             <Notifs
-              className={styles.notifs}
+              className={styles.notifications}
               namespace="global"
               NotifComponent={props => <Alert bsStyle={props.kind}>{props.message}</Alert>}
             />
           </div>}
 
-          {children}
+          <div className={styles.pageContainer}>
+            {children}
+          </div>
         </div>
-        <InfoBar />
 
-        <div className="well text-center">
-          Have questions? Ask for help{' '}
-          <a
-            href="https://github.com/erikras/react-redux-universal-hot-example/issues"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            on Github
-          </a>
-          {' '}or in the{' '}
-          <a
-            href="https://discord.gg/0ZcbPKXt5bZZb1Ko"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            #react-redux-universal
-          </a>
-          {' '}Discord channel.
-        </div>
+        <Footer />
       </div>
     );
   }
