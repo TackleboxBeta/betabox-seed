@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+const prompt = require('prompt');
+const writeToEnvFile = require('./util').writeToEnvFile;
+
+console.log('<<< Mailer Configuration >>>');
+
+prompt.start();
+prompt.get([
+  {
+    description: 'Mandrill API Key',
+    name: 'apiKey'
+  }
+], (err, result) => {
+  if (err) {
+    console.error(err);
+  } else {
+    writeToEnvFile('.env', 'MANDRILL_API_KEY', result.apiKey);
+    console.log('MANDRILL_API_KEY added to the .env file.');
+  }
+});
