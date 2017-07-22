@@ -2,6 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 import _ from 'lodash';
 import moment from 'moment-timezone';
 import crypto from 'crypto';
+import mailer from '../../utils/mailer';
 
 const authTypes = ['github', 'twitter', 'facebook', 'google'];
 

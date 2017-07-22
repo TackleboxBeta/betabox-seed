@@ -28,5 +28,8 @@ module.exports = {
         safe: true
       }
     }
+  },
+  mandrill: {
+    apiKey: process.env.MANDRILL_API_KEY
   }
 };
