@@ -41,6 +41,7 @@
     "no-plusplus": "off",
     "no-console": "off",
     "no-alert": "off",
+    "no-else-return": "off",
     "max-len": ["error", 120],
     "indent": ["error", 2, {"SwitchCase": 1}]
   },
