@@ -8,17 +8,34 @@ import rest from 'feathers-rest';
 import socketio from 'feathers-socketio';
 import isPromise from 'is-promise';
 import PrettyError from 'pretty-error';
+import mongoose from 'mongoose';
+import moment from 'moment-timezone';
+
+/* We need the config before we move forward */
+require('dotenv').config();
+
+/* eslint-disable import/first */
 import config from './config';
 import middleware from './middleware';
 import services from './services';
 import * as actions from './actions';
 import { mapUrl } from './utils/url.js';
 import auth, { socketAuth } from './services/authentication';
+import logger from './utils/logger';
+/* eslint-enable import/first */
 
-process.on('unhandledRejection', error => console.error(error));
+
+process.on('unhandledRejection', error => logger.error(error));
 
 const pretty = new PrettyError();
 const app = feathers();
+
+/* Mongoose Setup */
+mongoose.Promise = global.Promise;
+mongoose.connect(config.mongo.uri, config.mongo.options);
+
+/* Default everything to EST */
+moment.tz.setDefault('America/New_York');
 
 app.set('config', config)
   .use(morgan('dev'))
@@ -39,7 +56,7 @@ const actionsHandler = (req, res, next) => {
   req.app = app;
 
   const catchError = error => {
-    console.error('API ERROR:', pretty.render(error));
+    logger.error('API ERROR:', pretty.render(error));
     res.status(error.status || 500).json(error);
   };
 
@@ -80,13 +97,13 @@ app.configure(hooks())
 if (process.env.APIPORT) {
   app.listen(process.env.APIPORT, err => {
     if (err) {
-      console.error(err);
+      logger.error(err);
     }
-    console.info('----\n==> 🌎  API is running on port %s', process.env.APIPORT);
-    console.info('==> 💻  Send requests to http://localhost:%s', process.env.APIPORT);
+    logger.info('----\n==> API is running on port %s', process.env.APIPORT);
+    logger.info('==> Send requests to http://localhost:%s', process.env.APIPORT);
   });
 } else {
-  console.error('==>     ERROR: No APIPORT environment variable has been specified');
+  logger.error('==> ERROR: No APIPORT environment variable has been specified');
 }
 
 const bufferSize = 100;
