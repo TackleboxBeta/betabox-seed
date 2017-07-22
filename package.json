@@ -171,6 +171,7 @@
     "socket.io": "^2.0.1",
     "socket.io-client": "^2.0.1",
     "stream-buffers": "^3.0.1",
+    "stripe": "^4.23.1",
     "superagent": "^3.4.4",
     "uuid": "^3.1.0",
     "verror": "^1.10.0",
