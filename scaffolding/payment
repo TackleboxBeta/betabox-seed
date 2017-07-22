@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+const prompt = require('prompt');
+const writeToEnvFile = require('./util').writeToEnvFile;
+
+console.log('<<< Payment Configuration >>>');
+
+prompt.start();
+prompt.get([
+  {
+    description: 'Stripe API Key',
+    name: 'stripeApiKey'
+  }
+], (err, result) => {
+  if (err) {
+    console.error(err);
+  } else {
+    writeToEnvFile('.env', 'STRIPE_API_KEY', result.stripeApiKey);
+    console.log('STRIPE_API_KEY added to the .env file.');
+  }
+});

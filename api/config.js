@@ -35,5 +35,8 @@ module.exports = {
   },
   mandrill: {
     apiKey: process.env.MANDRILL_API_KEY
+  },
+  stripe: {
+    apiKey: process.env.STRIPE_API_KEY
   }
 };
