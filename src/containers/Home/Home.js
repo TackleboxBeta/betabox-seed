@@ -1,270 +1,98 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router';
-import { CounterButton, GithubButton } from 'components';
-import config from 'config';
 import Helmet from 'react-helmet';
-import { connect } from 'react-redux';
+import { LinkContainer } from 'react-router-bootstrap';
+import Jumbotron from 'react-bootstrap/lib/Jumbotron';
+import Button from 'react-bootstrap/lib/Button';
+import Grid from 'react-bootstrap/lib/Grid';
+import Row from 'react-bootstrap/lib/Row';
+import Col from 'react-bootstrap/lib/Col';
+import Image from 'react-bootstrap/lib/Image';
+import HeadingRow from 'components/HeadingRow/HeadingRow';
+import SectionContainer from 'components/SectionContainer/SectionContainer';
 
-@connect(
-  state => ({
-    online: state.online
-  })
-)
 export default class Home extends Component {
-
-  static propTypes = {
-    online: PropTypes.bool.isRequired
-  };
-
   render() {
-    const { online } = this.props;
     const styles = require('./Home.scss');
-    // require the logo image both from client and server
-    const logoImage = require('./logo.png');
+    const thumb = require('./images/thumbnail.png');
+
     return (
       <div className={styles.home}>
         <Helmet title="Home" />
-        <div className={styles.masthead}>
-          <div className="container">
-            <div className={styles.logo}>
-              <p>
-                <img src={logoImage} alt="presentation" />
-              </p>
-            </div>
-            <h1>{config.app.title}</h1>
 
-            <h2>{config.app.description}</h2>
+        <Jumbotron>
+          <Grid>
+            <Row>
+              <Col sm={12}>
+                <h1>Tacklebox Betashop</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris iaculis
+                  arcu ipsum, in convallis orci finibus vitae. Fusce risus purus, vestibulum
+                  in purus ut, tristique pharetra nisi. Mauris a sodales dolor. Cras dignissim
+                  turpis vel risus finibus, id lobortis mauris aliquam. Cras malesuada turpis
+                  blandit faucibus tempor. Praesent ut cursus lectus. Nam ac metus tellus.</p>
+                <p>
+                  <LinkContainer to="/register">
+                    <Button bsStyle="primary" bsSize="large">Get Started</Button>
+                  </LinkContainer>
+                </p>
+              </Col>
+            </Row>
+          </Grid>
+        </Jumbotron>
 
-            <p>
-              <a
-                className={styles.github}
-                href="https://github.com/erikras/react-redux-universal-hot-example"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fa fa-github" /> View on Github
-              </a>
-            </p>
-            {online && <GithubButton
-              user="erikras"
-              repo="react-redux-universal-hot-example"
-              type="star"
-              width={160}
-              height={30}
-              count
-              large
-            />}
-            {online && <GithubButton
-              user="erikras"
-              repo="react-redux-universal-hot-example"
-              type="fork"
-              width={160}
-              height={30}
-              count
-              large
-            />}
+        <SectionContainer pad={30}>
+          <Grid>
+            <HeadingRow>
+              <h3>Sed convallis dui id ligula aliquam, sit amet fringilla mauris dignissim</h3>
+              <p>Phasellus convallis sapien at vestibulum luctus. Class aptent taciti
+                sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                Phasellus convallis sapien at vestibulum luctus. Class aptent taciti
+                sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+            </HeadingRow>
 
-            <p className={styles.humility}>
-              Created and maintained by{' '}
-              <a href="https://twitter.com/erikras" target="_blank" rel="noopener noreferrer">@erikras</a>.
-            </p>
-          </div>
-        </div>
+            <Row>
+              <Col sm={12} md={4}>
+                <h4>Content Title</h4>
+                <p>Nunc eget ultricies lectus. Phasellus mollis fringilla tellus non hendrerit.
+                  Vivamus efficitur leo non ipsum euismod, eu vehicula odio dignissim.</p>
+              </Col>
 
-        <div className="container">
-          <div className={styles.counterContainer}>
-            <CounterButton multireducerKey="counter1" />
-            <CounterButton multireducerKey="counter2" />
-            <CounterButton multireducerKey="counter3" />
-          </div>
+              <Col sm={12} md={4}>
+                <h4>Content Title</h4>
+                <p>Ut vitae tortor sollicitudin, pellentesque nisi at, efficitur nisl. Ut vitae
+                  tortor sollicitudin, pellentesque nisi at, efficitur nisl.</p>
+              </Col>
 
-          <p>This starter boilerplate app uses the following technologies:</p>
+              <Col sm={12} md={4}>
+                <h4>Content Title</h4>
+                <p>Phasellus convallis sapien at vestibulum luctus. Class aptent taciti sociosqu
+                  ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+              </Col>
+            </Row>
+          </Grid>
+        </SectionContainer>
 
-          <ul>
-            <li>
-              <del>Isomorphic</del>
-              {' '}
-              <a href="https://medium.com/@mjackson/universal-javascript-4761051b7ae9">Universal</a> rendering
-            </li>
-            <li>Both client and server make calls to load data from separate API server</li>
-            <li>
-              <a href="https://github.com/facebook/react" target="_blank" rel="noopener noreferrer">
-                React
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/rackt/react-router" target="_blank" rel="noopener noreferrer">
-                React Router
-              </a>
-            </li>
-            <li>
-              <a href="http://expressjs.com" target="_blank" rel="noopener noreferrer">
-                Express
-              </a>
-            </li>
-            <li>
-              <a href="http://babeljs.io" target="_blank" rel="noopener noreferrer">Babel</a> for ES6 and ES7 magic
-            </li>
-            <li>
-              <a href="http://webpack.github.io" target="_blank" rel="noopener noreferrer">Webpack</a> for bundling
-            </li>
-            <li>
-              <a
-                href="http://webpack.github.io/docs/webpack-dev-middleware.html"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Webpack Dev Middleware
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/glenjamin/webpack-hot-middleware" target="_blank" rel="noopener noreferrer">
-                Webpack Hot Middleware
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/rackt/redux" target="_blank" rel="noopener noreferrer">Redux</a>
-              's futuristic{' '}
-              <a
-                href="https://facebook.github.io/react/blog/2014/05/06/flux.html"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Flux
-              </a>
-              {' '}implementation
-            </li>
-            <li>
-              <a href="https://github.com/gaearon/redux-devtools" target="_blank" rel="noopener noreferrer">
-                Redux Dev Tools
-              </a>
-              {' '}for next generation DX (developer experience). Watch{' '}
-              <a href="https://www.youtube.com/watch?v=xsSnOQynTHs" target="_blank" rel="noopener noreferrer">
-                Dan Abramov's talk
-              </a>.
-            </li>
-            <li>
-              <a href="https://github.com/rackt/redux-router" target="_blank" rel="noopener noreferrer">
-                Redux Router
-              </a>
-              {' '}Keep your router state in your Redux store
-            </li>
-            <li>
-              <a href="http://eslint.org" target="_blank" rel="noopener noreferrer">ESLint</a>
-              {' '}to maintain a consistent code style
-            </li>
-            <li>
-              <a href="https://github.com/erikras/redux-form" target="_blank" rel="noopener noreferrer">redux-form</a>
-              {' '}to manage form state in Redux
-            </li>
-            <li>
-              <a href="https://github.com/erikras/multireducer" target="_blank" rel="noopener noreferrer">
-                multireducer
-              </a>
-              {' '}combine several identical reducer states into one key-based reducer
-            </li>
-            <li>
-              <a href="https://github.com/webpack/style-loader" target="_blank" rel="noopener noreferrer">
-                style-loader
-              </a>
-              {' '}and{' '}
-              <a
-                href="https://github.com/jtangelder/sass-loader"
-                target="_blank"
-                rel="noopener noreferrer">
-                sass-loader
-              </a>
-              {' '}to allow import of stylesheets
-            </li>
-            <li>
-              <a href="https://github.com/shakacode/bootstrap-sass-loader" target="_blank" rel="noopener noreferrer">
-                bootstrap-sass-loader
-              </a>
-              {' '}and{' '}
-              <a
-                href="https://github.com/gowravshekar/font-awesome-webpack"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                font-awesome-webpack
-              </a>
-              {' '}to customize Bootstrap and FontAwesome
-            </li>
-            <li><a href="http://socket.io/">socket.io</a> for real-time communication</li>
-          </ul>
+        <SectionContainer pad={30}>
+          <Grid>
+            <HeadingRow>
+              <h3>Ut vitae tortor sollicitudin, pellentesque nisi at, efficitur nisl</h3>
+              <p>Class aptent ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+            </HeadingRow>
 
-          <h3>Features demonstrated in this project</h3>
+            <Row>
+              <Col sm={12} md={4}>
+                <Image src={thumb} circle responsive />
+              </Col>
 
-          <dl>
-            <dt>Multiple components subscribing to same redux store slice</dt>
-            <dd>
-              The <code>App.js</code> that wraps all the pages contains an <code>InfoBar</code> component
-              that fetches data from the server initially, but allows for the user to refresh the data from
-              the client. <code>About.js</code> contains a <code>MiniInfoBar</code> that displays the same
-              data.
-            </dd>
-            <dt>Server-side data loading</dt>
-            <dd>
-              The <Link to="/widgets">Widgets page</Link> demonstrates how to fetch data asynchronously from
-              some source that is needed to complete the server-side rendering. <code>Widgets.js</code>'s
-              <code>asyncConnect()</code> function is called before the widgets page is loaded, on either the server
-              or the client, allowing all the widget data to be loaded and ready for the page to render.
-            </dd>
-            <dt>Data loading errors</dt>
-            <dd>
-              The <Link to="/widgets">Widgets page</Link> also demonstrates how to deal with data loading
-              errors in Redux. The API endpoint that delivers the widget data intentionally fails 33% of
-              the time to highlight this. The <code>clientMiddleware</code> sends an error action which
-              the <code>widgets</code> reducer picks up and saves to the Redux state for presenting to the user.
-            </dd>
-            <dt>Session based login</dt>
-            <dd>
-              On the <Link to="/login">Login page</Link> you can submit a username which will be sent to the server
-              and stored in the session. Subsequent refreshes will show that you are still logged in.
-            </dd>
-            <dt>Redirect after state change</dt>
-            <dd>
-              After you log in, you will be redirected to a Login Success page. This <strike>magic</strike> logic
-              is performed in <code>componentWillReceiveProps()</code> in <code>App.js</code>, but it could
-              be done in any component that listens to the appropriate store slice, via Redux's <code>@connect</code>,
-              and pulls the router from the context.
-            </dd>
-            <dt>Auth-required views</dt>
-            <dd>
-              The aforementioned Login Success page is only visible to you if you are logged in. If you try
-              to <Link to="/loginSuccess">go there</Link> when you are not logged in, you will be forwarded back
-              to this home page. This <strike>magic</strike> logic is performed by the
-              <code>onEnter</code> hook within <code>routes.js</code>.
-            </dd>
-            <dt>Forms</dt>
-            <dd>
-              The <Link to="/survey">Survey page</Link> uses the
-              still-experimental{' '}
-              <a href="https://github.com/erikras/redux-form" target="_blank" rel="noopener noreferrer">redux-form</a>
-              {' '}to manage form state inside the Redux store. This includes immediate client-side validation.
-            </dd>
-            <dt>WebSockets / socket.io</dt>
-            <dd>
-              The <Link to="/chat">Chat</Link> uses the socket.io technology for real-time
-              communication between clients.
-            </dd>
-          </dl>
+              <Col sm={12} md={4}>
+                <Image src={thumb} circle responsive />
+              </Col>
 
-          <h3>From the author</h3>
-
-          <p>
-            I cobbled this together from a wide variety of similar "starter" repositories. As I post this in June 2015,
-            all of these libraries are right at the bleeding edge of web development. They may fall out of fashion as
-            quickly as they have come into it, but I personally believe that this stack is the future of web development
-            and will survive for several years. I'm building my new projects like this, and I recommend that you do,
-            too.
-          </p>
-
-          <p>Thanks for taking the time to check this out.</p>
-
-          <p>– Erik Rasmussen</p>
-        </div>
+              <Col sm={12} md={4}>
+                <Image src={thumb} circle responsive />
+              </Col>
+            </Row>
+          </Grid>
+        </SectionContainer>
       </div>
     );
   }
