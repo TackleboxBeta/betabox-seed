@@ -10,3 +10,5 @@ npm-debug.log
 webpack/dlls/*.json
 api/**/*.nedb
 *.report.html
+.env
+log/

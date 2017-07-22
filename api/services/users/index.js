@@ -1,22 +1,19 @@
-import feathersNedb from 'feathers-nedb';
-import NeDB from 'nedb';
+import feathersMongoose from 'feathers-mongoose';
 import hooks from './hooks';
+import Model from './model';
 
 export default function userService() {
   const app = this;
 
   const options = {
-    Model: new NeDB({
-      filename: `${__dirname}/users.nedb`,
-      autoload: true
-    }),
+    Model,
     paginate: {
       default: 5,
       max: 25
     }
   };
 
-  app.use('/users', feathersNedb(options));
+  app.use('/users', feathersMongoose(options));
 
   app.service('users').hooks(hooks);
 }

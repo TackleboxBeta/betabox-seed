@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:6
+FROM mhart/alpine-node:8.2.1
 
 # Install required dependencies (Alpine Linux packages)
 RUN apk update && \

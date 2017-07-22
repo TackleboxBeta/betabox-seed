@@ -20,5 +20,13 @@ module.exports = {
       profileFields: ['id', 'displayName', 'photos', 'email', 'first_name', 'last_name', 'age_range'],
       accessTokenField: 'accessToken'
     }
+  },
+  mongo: {
+    uri: process.env.MONGO_URI,
+    options: {
+      db: {
+        safe: true
+      }
+    }
   }
 };
