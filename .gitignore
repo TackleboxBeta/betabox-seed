@@ -13,3 +13,4 @@ api/**/*.nedb
 .DS_Store
 .env
 log/
+jobs/api

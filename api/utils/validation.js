@@ -1,5 +1,6 @@
 import isPromise from 'is-promise';
 import * as validation from '../../src/utils/validation';
+import { ERRORS } from '../../src/strings';
 
 function createAsyncValidator(rules, params) {
   return (data = {}) => {
@@ -33,7 +34,7 @@ function unique(field) {
   return (value, data, { hook }) => hook.service.find({ query: { [field]: value } })
     .then(result => {
       if (result.total !== 0) {
-        return Promise.reject('Already exist');
+        return Promise.reject(ERRORS.ACCOUNT_ALREADY_EXISTS);
       }
     });
 }

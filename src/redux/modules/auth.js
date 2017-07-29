@@ -1,19 +1,23 @@
 import { socket } from 'app';
 import { SubmissionError } from 'redux-form';
 import cookie from 'js-cookie';
+import { ERRORS } from '../../strings';
 
-const LOAD = 'redux-example/auth/LOAD';
-const LOAD_SUCCESS = 'redux-example/auth/LOAD_SUCCESS';
-const LOAD_FAIL = 'redux-example/auth/LOAD_FAIL';
-const LOGIN = 'redux-example/auth/LOGIN';
-const LOGIN_SUCCESS = 'redux-example/auth/LOGIN_SUCCESS';
-const LOGIN_FAIL = 'redux-example/auth/LOGIN_FAIL';
-const REGISTER = 'redux-example/auth/REGISTER';
-const REGISTER_SUCCESS = 'redux-example/auth/REGISTER_SUCCESS';
-const REGISTER_FAIL = 'redux-example/auth/REGISTER_FAIL';
-const LOGOUT = 'redux-example/auth/LOGOUT';
-const LOGOUT_SUCCESS = 'redux-example/auth/LOGOUT_SUCCESS';
-const LOGOUT_FAIL = 'redux-example/auth/LOGOUT_FAIL';
+const LOAD = 'redux/auth/LOAD';
+const LOAD_SUCCESS = 'redux/auth/LOAD_SUCCESS';
+const LOAD_FAIL = 'redux/auth/LOAD_FAIL';
+const LOGIN = 'redux/auth/LOGIN';
+const LOGIN_SUCCESS = 'redux/auth/LOGIN_SUCCESS';
+const LOGIN_FAIL = 'redux/auth/LOGIN_FAIL';
+const REGISTER = 'redux/auth/REGISTER';
+const REGISTER_SUCCESS = 'redux/auth/REGISTER_SUCCESS';
+const REGISTER_FAIL = 'redux/auth/REGISTER_FAIL';
+const FORGOT_PASSWORD = 'redux/auth/FORGOT_PASSWORD';
+const FORGOT_PASSWORD_SUCCESS = 'redux/auth/FORGOT_PASSWORD_SUCCESS';
+const FORGOT_PASSWORD_FAIL = 'redux/auth/FORGOT_PASSWORD_FAIL';
+const LOGOUT = 'redux/auth/LOGOUT';
+const LOGOUT_SUCCESS = 'redux/auth/LOGOUT_SUCCESS';
+const LOGOUT_FAIL = 'redux/auth/LOGOUT_FAIL';
 
 const initialState = {
   loaded: false
@@ -103,7 +107,12 @@ const catchValidation = error => {
     if (error.message === 'Validation failed' && error.data) {
       throw new SubmissionError(error.data);
     }
-    throw new SubmissionError({ _error: error.message });
+    throw new SubmissionError({
+      _error: {
+        /* ERROR codes mapping to messages should be entered here */
+        401: ERRORS.INVALID_EMAIL_OR_PASSWORD
+      }[error.code] || ERRORS.INVALID_EMAIL_OR_PASSWORD
+    });
   }
   return Promise.reject(error);
 };
@@ -167,14 +176,21 @@ export function login(strategy, data, validation = true) {
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
     promise: ({ client, restApp, app }) => restApp.authenticate({
-      ...data,
-      strategy,
-      socketId
-    })
+        ...data,
+        strategy,
+        socketId
+      })
       .then(setToken({ client, app, restApp }))
       .then(setCookie({ app }))
       .then(setUser({ app, restApp }))
       .catch(validation ? catchValidation : error => Promise.reject(error))
+  };
+}
+
+export function forgotPassword(data) {
+  return {
+    types: [FORGOT_PASSWORD, FORGOT_PASSWORD_SUCCESS, FORGOT_PASSWORD_FAIL],
+    promise: ({ client }) => client.post('/users/forgotPassword', { data })
   };
 }
 

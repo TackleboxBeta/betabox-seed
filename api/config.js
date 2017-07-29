@@ -24,7 +24,7 @@ module.exports = {
   aws: {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-  }
+  },
   mongo: {
     uri: process.env.MONGO_URI,
     options: {
@@ -34,9 +34,11 @@ module.exports = {
     }
   },
   mandrill: {
-    apiKey: process.env.MANDRILL_API_KEY
+    apiKey: process.env.MANDRILL_API_KEY,
+    fromEmail: process.env.MANDRILL_FROM_EMAIL
   },
   stripe: {
-    apiKey: process.env.STRIPE_API_KEY
+    apiKey: process.env.STRIPE_API_KEY,
+    demoApiKey: process.env.STRIPE_DEMO_API_KEY
   }
 };

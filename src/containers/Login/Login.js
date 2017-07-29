@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import Helmet from 'react-helmet';
 import LoginForm from 'components/LoginForm/LoginForm';
 import FacebookLogin from 'components/FacebookLogin/FacebookLogin';
 import * as authActions from 'redux/modules/auth';
 import * as notifActions from 'redux/modules/notifs';
+import { MESSAGES } from '../../strings';
 
 @connect(
   state => ({ user: state.auth.user }),
@@ -16,15 +18,15 @@ export default class Login extends Component {
     login: PropTypes.func.isRequired,
     logout: PropTypes.func.isRequired,
     notifSend: PropTypes.func.isRequired
-  }
+  };
 
   static defaultProps = {
     user: null
-  }
+  };
 
   static contextTypes = {
     router: PropTypes.object
-  }
+  };
 
   onFacebookLogin = (err, data) => {
     if (err) return;
@@ -44,7 +46,7 @@ export default class Login extends Component {
 
   successLogin = data => {
     this.props.notifSend({
-      message: 'You\'r logged !',
+      message: MESSAGES.SUCCESSFULLY_LOGGED_IN,
       kind: 'success',
       dismissAfter: 2000
     });
@@ -64,7 +66,7 @@ export default class Login extends Component {
         <Helmet title="Login" />
         <h1>Login</h1>
         {!user && <div>
-          <LoginForm onSubmit={this.login} />
+          <LoginForm onSubmit={this.login} onForgotPassword={this.forgotPassword} />
           <p>This will "log you in" as this user, storing the username in the session of the API server.</p>
           <FacebookLogin
             appId="635147529978862"

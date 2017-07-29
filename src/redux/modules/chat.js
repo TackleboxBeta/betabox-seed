@@ -1,7 +1,7 @@
-const LOAD = 'redux-example/chat/LOAD';
-const LOAD_SUCCESS = 'redux-example/chat/LOAD_SUCCESS';
-const LOAD_FAIL = 'redux-example/chat/LOAD_FAIL';
-const ADD_MESSAGE = 'redux-example/chat/ADD_MESSAGE';
+const LOAD = 'redux/chat/LOAD';
+const LOAD_SUCCESS = 'redux/chat/LOAD_SUCCESS';
+const LOAD_FAIL = 'redux/chat/LOAD_FAIL';
+const ADD_MESSAGE = 'redux/chat/ADD_MESSAGE';
 
 const initialState = {
   loaded: false,
