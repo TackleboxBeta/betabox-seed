@@ -1,0 +1,1 @@
+*/30 * * * * cd /opt/app && NODE_ENV=<%= environment %> /usr/local/bin/npm run cron >> /var/log/cron.log 2>&1

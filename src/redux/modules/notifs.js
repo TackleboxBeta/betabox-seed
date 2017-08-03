@@ -1,7 +1,7 @@
-const NOTIF_SEND = 'redux-example/notifs/NOTIF_SEND';
-const NOTIF_DISMISS = 'redux-example/notifs/NOTIF_DISMISS';
-const NOTIF_CLEAR = 'redux-example/notifs/NOTIF_CLEAR';
-const NOTIF_CLEAR_ALL = 'redux-example/notifs/NOTIF_CLEAR_ALL';
+const NOTIF_SEND = 'redux/notifs/NOTIF_SEND';
+const NOTIF_DISMISS = 'redux/notifs/NOTIF_DISMISS';
+const NOTIF_CLEAR = 'redux/notifs/NOTIF_CLEAR';
+const NOTIF_CLEAR_ALL = 'redux/notifs/NOTIF_CLEAR_ALL';
 
 const initialState = {};
 

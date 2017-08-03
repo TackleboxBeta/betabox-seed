@@ -42,7 +42,7 @@
     "no-console": "off",
     "no-alert": "off",
     "no-else-return": "off",
-    "max-len": ["error", 120],
+    "max-len": ["error", 180],
     "indent": ["error", 2, {"SwitchCase": 1}]
   },
   "plugins": [

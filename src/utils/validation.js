@@ -1,3 +1,5 @@
+import { ERRORS } from '../strings';
+
 const isEmpty = value => value === undefined || value === null || value === '';
 const join = rules => (value, data, params) => rules.map(rule => rule(value, data, params)).filter(error => !!error)[0];
 
@@ -48,7 +50,7 @@ export function match(field) {
   return (value, data) => {
     if (data) {
       if (value !== data[field]) {
-        return 'Do not match';
+        return ERRORS.PASSWORDS_DO_NOT_MATCH;
       }
     }
   };
