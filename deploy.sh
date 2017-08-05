@@ -3,10 +3,10 @@
 environment=$1
 
 if [[ -n "$environment" ]]; then
-  #STAGING eval "$(docker-machine env TEST-PROJECT-staging)"
-  #PRODUCTION eval "$(docker-machine env TEST-PROJECT-production)"
+  #STAGING eval "$(docker-machine env banana-leaf-staging)"
+  #PRODUCTION eval "$(docker-machine env banana-leaf-production)"
 
-  eval "$(docker-machine env TEST-PROJECT-${environment})"
+  eval "$(docker-machine env banana-leaf-${environment})"
   docker stop $(docker ps -a -q)
   docker rmi $(docker images -f "dangling=true" -q)
   docker-compose build

@@ -14,3 +14,4 @@ api/**/*.nedb
 .env
 log/
 jobs/api
+create-droplet.sh
