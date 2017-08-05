@@ -1,6 +1,6 @@
 #! /usr/bin/env sh
 
-PROJECTNAME="react-redux-feathers"
+PROJECTNAME="banana-boat"
 
 PROJECTDIR=$(pwd)
 

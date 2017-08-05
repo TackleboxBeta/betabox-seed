@@ -3,12 +3,12 @@ services:
   app:
     build: .
     ports:
-      - "80:3000"
+      - "80:8080"
       - "3030:3030"
     command: npm start
     restart: always
 
-  jobs:
-    build: ./jobs
-    command: npm run jobs
-    restart: always
+#  jobs:
+#    build: ./jobs
+#    command: npm run jobs
+#    restart: always

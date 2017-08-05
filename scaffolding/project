@@ -19,10 +19,25 @@ function updateDockerBuildScript(projectName) {
   }).join('\n'));
 }
 
+function updateDeployShellScript(projectName) {
+  const scriptPath = './deploy.sh';
+  const deployScriptLines = fs.readFileSync(scriptPath, 'utf-8').split('\n');
+  fs.writeFileSync(scriptPath, _.map(deployScriptLines, (line) => {
+    if (/docker-machine\senv/.test(line)) {
+      return line
+        .replace(/\$\(docker-machine\senv\s(.*?)-staging\)/, `$(docker-machine env ${projectName}-staging)`)
+        .replace(/\$\(docker-machine\senv\s(.*?)-production\)/, `$(docker-machine env ${projectName}-production)`)
+        .replace(/\$\(docker-machine\senv\s(.*?)-\${environment}\)/, `$(docker-machine env ${projectName}-$\{environment})`);
+    } else {
+      return line;
+    }
+  }).join('\n'));
+}
+
 prompt.start();
 prompt.get([
   {
-    description: 'Project Name',
+    description: 'Project Name (Kebab Case)',
     name: 'projectName'
   }
 ], (err, result) => {
@@ -31,6 +46,7 @@ prompt.get([
   } else {
     writeToEnvFile('.env', 'PROJECT_NAME', result.projectName);
     updateDockerBuildScript(result.projectName);
+    updateDeployShellScript(result.projectName);
     console.log('PROJECT_NAME added to the .env file and Docker build scripts.');
   }
 });
