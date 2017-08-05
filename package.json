@@ -32,7 +32,7 @@
     "start-dev": "better-npm-run start-dev",
     "start-dev-api": "better-npm-run start-dev-api",
     "start-debug-api": "better-npm-run start-debug-api",
-    "cron": "babel-node jobs/scheduler.js",
+    "jobs": "babel-node jobs/scheduler.js",
     "watch-client": "better-npm-run watch-client",
     "build": "better-npm-run build",
     "build-dlls": "webpack --colors --display-error-details --config webpack/vendor.config.js",

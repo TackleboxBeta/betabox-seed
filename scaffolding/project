@@ -1,0 +1,36 @@
+#!/usr/bin/env node
+
+const prompt = require('prompt');
+const fs = require('fs-extra');
+const _ = require('lodash');
+const writeToEnvFile = require('./util').writeToEnvFile;
+
+console.log('<<< Project Configuration >>>');
+
+function updateDockerBuildScript(projectName) {
+  const scriptPath = './docker/build.sh';
+  const buildScriptLines = fs.readFileSync(scriptPath, 'utf-8').split('\n');
+  fs.writeFileSync(scriptPath, _.map(buildScriptLines, (line) => {
+    if (/PROJECTNAME=/.test(line)) {
+      return `PROJECTNAME="${projectName}"`;
+    } else {
+      return line;
+    }
+  }).join('\n'));
+}
+
+prompt.start();
+prompt.get([
+  {
+    description: 'Project Name',
+    name: 'projectName'
+  }
+], (err, result) => {
+  if (err) {
+    console.error(err);
+  } else {
+    writeToEnvFile('.env', 'PROJECT_NAME', result.projectName);
+    updateDockerBuildScript(result.projectName);
+    console.log('PROJECT_NAME added to the .env file and Docker build scripts.');
+  }
+});

@@ -2,7 +2,7 @@
 
 PROJECTNAME="react-redux-feathers"
 
-PROJECTDIR=$(dirname $(dirname $(readlink -f "$0")))
+PROJECTDIR=$(pwd)
 
 docker build \
   --build-arg user=$USER \
