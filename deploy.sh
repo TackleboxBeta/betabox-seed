@@ -6,7 +6,7 @@ if [[ -n "$environment" ]]; then
   #STAGING eval "$(docker-machine env cheddar-burger-staging)"
   #PRODUCTION eval "$(docker-machine env cheddar-burger-production)"
 
-  npm run postinstall
+  npm run build-all
   eval "$(docker-machine env cheddar-burger-${environment})"
   docker stop $(docker ps -a -q)
   docker rmi $(docker images -f "dangling=true" -q)

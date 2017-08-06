@@ -36,7 +36,7 @@
     "watch-client": "better-npm-run watch-client",
     "build": "better-npm-run build",
     "build-dlls": "webpack --colors --display-error-details --config webpack/vendor.config.js",
-    "postinstall": "concurrently \"npm run build\" \"npm run build-dlls\"",
+    "build-all": "concurrently \"npm run build\" \"npm run build-dlls\"",
     "lint": "eslint -c .eslintrc api src",
     "test": "karma start",
     "test-node": "jest $(find api -name '*-test.js')",

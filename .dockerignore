@@ -3,10 +3,7 @@
 node_modules/
 yarn.lock
 *.iml
-webpack-assets.json
-webpack-stats.json
 npm-debug.log
 .happypack
-webpack/dlls/*.json
 api/**/*.nedb
 *.report.html
