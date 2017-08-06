@@ -25,8 +25,8 @@ RUN echo $user' ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 WORKDIR /external
 
 # Install (global) NPM packages/dependencies
-RUN npm install -g \
-  node-gyp
+# @TODO find out why we can't do this for now
+#RUN npm install -g node-gyp
 
 # Make project directory with permissions
 RUN mkdir /project

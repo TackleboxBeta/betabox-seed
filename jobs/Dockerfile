@@ -14,5 +14,3 @@ ADD deployment/etc/cron.d/jobs-template /etc/cron.d/jobs
 RUN chmod 644 /etc/cron.d/jobs && \
     crontab /etc/cron.d/jobs && \
     touch /var/log/cron.log
-
-CMD ["npm", "run", "jobs"]
