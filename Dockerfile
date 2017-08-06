@@ -38,4 +38,4 @@ WORKDIR /project
 COPY . .
 
 # Install (local) NPM packages and build
-RUN npm install && npm run postinstall
+RUN npm install
