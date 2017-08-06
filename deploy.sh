@@ -9,6 +9,7 @@ if [[ -n "$environment" ]]; then
   #Env Files
   mkdir -p ./tmp/deployment
   cp .env.${environment} tmp/deployment/.env
+  cp package.json tmp/deployment/package.json
 
   #Build Process
   npm run build-all

@@ -8,6 +8,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
 
 RUN mkdir -p /opt/app
 COPY . /opt/app
+COPY ./tmp/deployment/package.json package.json
 RUN ln -s /usr/local/bin/node /usr/bin/node
 ADD deployment/etc/cron.d/jobs-template /etc/cron.d/jobs
 RUN chmod 644 /etc/cron.d/jobs && \
