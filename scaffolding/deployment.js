@@ -19,8 +19,7 @@ prompt.get([
   if (err) {
     console.error(err);
   } else {
-    writeToEnvFile('.env', 'AWS_ACCESS_KEY_ID', result.accessKeyId);
-    writeToEnvFile('.env', 'AWS_SECRET_ACCESS_KEY', result.secretAccessKey);
-    console.log('AWS_ACCESS_KEY_ID & AWS_SECRET_ACCESS_KEY added to the .env file.');
+
+    console.log('Deployment MONGO_URI have been added to the .env.staging and .env.production files.');
   }
 });

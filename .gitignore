@@ -12,6 +12,8 @@ api/**/*.nedb
 *.report.html
 .DS_Store
 .env
+.env.staging
+.env.production
 log/
 jobs/api
 create-droplet.sh
