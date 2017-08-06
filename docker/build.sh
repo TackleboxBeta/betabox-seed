@@ -1,6 +1,6 @@
 #! /usr/bin/env sh
 
-PROJECTNAME="kebab-boss"
+PROJECTNAME="cheddar-burger"
 
 PROJECTDIR=$(pwd)
 

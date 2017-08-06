@@ -38,7 +38,7 @@ function updateDeployShellScript(projectName) {
 function makeCreateDropletScript(projectName, digitalOceanAccessToken) {
   fs.writeFileSync('./create-droplet.sh', '#!/usr/bin/env bash\n' +
     '\n' +
-    `docker-machine create -d digitalocean --digitalocean-access-token=${digitalOceanAccessToken} ${projectName}-production`);
+    `docker-machine create -d digitalocean --digitalocean-access-token=${digitalOceanAccessToken} --digitalocean-image ubuntu-16-04-x64 ${projectName}-production`);
 }
 
 prompt.start();
