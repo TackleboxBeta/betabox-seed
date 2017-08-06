@@ -26,7 +26,7 @@
   "scripts": {
     "empty": "tail -f /dev/null",
     "start": "concurrently --kill-others \"npm run start-prod\" \"npm run start-prod-api\"",
-    "start-prod": "NODE_ENV=production NODE_PATH=./src PORT=8080 APIPORT=3030 node ./bin/server.js",
+    "start-prod": "sleep 60 && NODE_ENV=production NODE_PATH=./src PORT=8080 APIPORT=3030 node ./bin/server.js",
     "start-prod-api": "better-npm-run start-prod-api",
     "dev": "concurrently --kill-others \"npm run watch-client\" \"npm run start-dev\" \"npm run start-dev-api\"",
     "dev-debug": "concurrent --kill-others \"npm run watch-client\" \"npm run start-dev\" \"npm run start-debug-api\"",
