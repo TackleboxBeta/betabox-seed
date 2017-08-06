@@ -45,7 +45,13 @@
     "docker-dev": ". ./docker/run.dev.sh",
     "docker-prod": ". ./docker/run.prod.sh",
     "db": "cd docker/dev && docker-compose build && docker-compose up",
-    "all-credentials": "scaffolding/db && scaffolding/filestore && scaffolding/mailer && scaffolding/payment",
+    "scaffold-all": "npm run scaffold-project && npm run scaffold-db && npm run scaffold-filestore && npm run scaffold-jobs && npm run scaffold-mailer && npm run scaffold-payment",
+    "scaffold-project": "scaffolding/project.js",
+    "scaffold-db": "scaffolding/db.js",
+    "scaffold-filestore": "scaffolding/filestore.js",
+    "scaffold-jobs": "scaffolding/jobs.js",
+    "scaffold-mailer": "scaffolding/mailer.js",
+    "scaffold-payment": "scaffolding/payment.js",
     "lighthouse-report": "LIGHTHOUSE_CHROMIUM_PATH=$(which google-chrome) lighthouse http://localhost:8080"
   },
   "betterScripts": {
