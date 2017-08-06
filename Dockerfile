@@ -37,5 +37,9 @@ WORKDIR /project
 # Copy required stuff
 COPY . .
 
+# Copy specific .env file
+COPY ./tmp/deployment/.env .env
+
 # Install (local) NPM packages and build
-RUN npm install
+# @TODO find out why we can't do this for now
+#RUN npm install
