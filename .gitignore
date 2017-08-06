@@ -17,5 +17,6 @@ api/**/*.nedb
 log/
 jobs/api
 jobs/tmp
+jobs/package.json
 create-droplet.sh
 tmp/
