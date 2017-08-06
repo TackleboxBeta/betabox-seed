@@ -1,3 +1,8 @@
+require('dotenv').config();
+
+console.log(process.env.MONGO_URI);
+
+/* eslint-disable import/first */
 import moment from 'moment-timezone';
 import mongoose from 'mongoose';
 import config from './api/config';
@@ -10,6 +15,7 @@ import {
   startTask,
   finishTask
 } from './shared';
+/* eslint-enable import/first */
 
 // Default everything to EST
 moment.tz.setDefault('America/New_York');
@@ -20,13 +26,15 @@ logger.info('Running scheduled cron tasks for ' + (process.env.NODE_ENV || 'deve
 mongoose.Promise = global.Promise;
 
 // Connect to database
-mongoose.connect(config.mongo.uri, config.mongo.options);
+
+// @TODO for some reason the normal mongo configuration from the project is not working here config.mongo.uri
+mongoose.connect(process.env.MONGO_URI, config.mongo.options);
 
 /* eslint-disable import/no-dynamic-require */
 export default Promise.all([
   ((task) => {
     // Database backups should only run in production
-    if (laterThan('06:00') && !hasTaskBeenRunToday(task) && process.env.NODE_ENV === 'production') {
+    if (laterThan('06:00') && !hasTaskBeenRunToday(task) && process.env.NODE_ENV === 'production' && false) {
       return startTask(task)
         .then(acceptNoArguments(require(task)))
         .then(finishTask(task))

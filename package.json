@@ -32,7 +32,7 @@
     "start-dev": "better-npm-run start-dev",
     "start-dev-api": "better-npm-run start-dev-api",
     "start-debug-api": "better-npm-run start-debug-api",
-    "jobs": "babel-node scheduler.js",
+    "start-jobs": "babel-node scheduler.js",
     "watch-client": "better-npm-run watch-client",
     "build": "better-npm-run build",
     "build-dlls": "webpack --colors --display-error-details --config webpack/vendor.config.js",
@@ -98,6 +98,12 @@
         "NODE_ENV": "development",
         "APIPORT": 3030,
         "DEBUG": true
+      }
+    },
+    "start-jobs": {
+      "command": "node_modules/.bin/babel-node scheduler.js",
+      "env": {
+        "NODE_ENV": "production"
       }
     },
     "watch-client": {
