@@ -12,7 +12,7 @@ services:
     command: npm start
     restart: always
 
-#  jobs:
-#    build: ./jobs
-#    command: npm run start-jobs
-#    restart: always
+  jobs:
+    build: ./jobs
+    command: npm run start-jobs
+    restart: always
