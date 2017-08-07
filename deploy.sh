@@ -24,7 +24,7 @@ if [[ -n "$environment" ]]; then
   docker stop $(docker ps -a -q)
   docker rmi $(docker images -f "dangling=true" -q)
   docker-compose build
-  docker-compose up
+  docker-compose up -d
 
   #Cleanup
   rm -rf tmp/deployment
