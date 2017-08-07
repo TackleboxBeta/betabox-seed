@@ -45,6 +45,7 @@ UserSchema.methods = {
   forgotPassword() {
     return new Promise((resolve, reject) => {
       const generatedPassword = generateTempPassword();
+      console.log(generatedPassword);
       hashPassword(generatedPassword).then((hashedPassword) => {
         this.password = hashedPassword;
         this.tempPassword = true;

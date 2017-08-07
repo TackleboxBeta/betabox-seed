@@ -46,6 +46,7 @@ export default store => {
       */}
       <Route {...permissionsComponent(isAuthenticated)()}>
         <Route path="loginSuccess" getComponent={() => System.import('./containers/LoginSuccess/LoginSuccess')} />
+        <Route path="temppasswordforcechange" getComponent={() => System.import('./containers/TempPasswordForceChange/TempPasswordForceChange')} />
         <Route
           path="chatFeathers"
           getComponent={() => injectReducerAndRender(

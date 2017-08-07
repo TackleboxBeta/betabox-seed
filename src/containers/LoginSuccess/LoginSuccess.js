@@ -11,7 +11,7 @@ class LoginSuccess extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
     logout: PropTypes.func.isRequired
-  }
+  };
 
   render() {
     const { user, logout } = this.props;

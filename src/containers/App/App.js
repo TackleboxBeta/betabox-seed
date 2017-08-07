@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import Alert from 'react-bootstrap/lib/Alert';
 import Helmet from 'react-helmet';
@@ -52,7 +53,13 @@ export default class App extends Component {
   componentWillReceiveProps(nextProps) {
     if (!this.props.user && nextProps.user) {
       // login
-      const redirect = this.props.router.location.query && this.props.router.location.query.redirect;
+      const redirect = (() => {
+        if (_.get(nextProps.user, 'tempPassword')) {
+          return '/temppasswordforcechange';
+        } else {
+          return this.props.router.location.query && this.props.router.location.query.redirect;
+        }
+      });
       this.props.pushState(redirect || '/loginSuccess');
     } else if (this.props.user && !nextProps.user) {
       // logout
