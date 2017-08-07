@@ -14,12 +14,12 @@ export default class Register extends Component {
     location: PropTypes.object.isRequired,
     register: PropTypes.func.isRequired,
     notifSend: PropTypes.func.isRequired
-  }
+  };
 
   getInitialValues = () => {
     const { location } = this.props;
     return location.state && location.state.oauth;
-  }
+  };
 
   register = data => this.props.register(data).then(this.successRegister);
 
@@ -30,7 +30,7 @@ export default class Register extends Component {
       dismissAfter: 2000
     });
     return result;
-  }
+  };
 
   render() {
     return (

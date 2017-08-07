@@ -7,7 +7,7 @@ import _ from 'lodash';
  */
 export function definedOr(...args) {
   if (_.isUndefined(args[0]) && args.length > 1) {
-    return exports.definedOr.apply(this, _.tail(args));
+    return definedOr.apply(this, _.tail(args));
   } else {
     return args[0];
   }

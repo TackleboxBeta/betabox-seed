@@ -2,6 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 import _ from 'lodash';
 import moment from 'moment-timezone';
 import mailer from '../../utils/mailer';
+import { hashPassword } from '../../utils/crypto';
 
 // @TODO, pieces in this model that are specific to KINDRA still need to be undone (https://trello.com/c/KZACnwMe/29-user-model-must-be-updated-to-remove-kindra-cruft-and-do-real-password-encyrption)
 const UserSchema = new Schema({
@@ -43,25 +44,28 @@ UserSchema.methods = {
    */
   forgotPassword() {
     return new Promise((resolve, reject) => {
-      this.password = generateTempPassword();
-      this.tempPassword = true;
-      this.save((err, user) => {
-        if (err) {
-          reject(err);
-        } else {
-          mailer()
-            .from('danielle@givekindra.com')
-            .to(user.email)
-            .template('forgot-password')
-            .globalMergeVar('password', user.password)
-            .send((error) => {
-              if (error) {
-                reject(error);
-              } else {
-                resolve(user);
-              }
-          });
-        }
+      const generatedPassword = generateTempPassword();
+      hashPassword(generatedPassword).then((hashedPassword) => {
+        this.password = hashedPassword;
+        this.tempPassword = true;
+        this.save((err, user) => {
+          if (err) {
+            reject(err);
+          } else {
+            mailer()
+              .from('danielle@givekindra.com')
+              .to(user.email)
+              .template('forgot-password')
+              .globalMergeVar('password', user.password)
+              .send((error) => {
+                if (error) {
+                  reject(error);
+                } else {
+                  resolve(user);
+                }
+              });
+          }
+        });
       });
     });
   }
