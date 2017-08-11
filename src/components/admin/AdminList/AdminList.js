@@ -9,7 +9,9 @@ function th({ name }) {
 }
 
 function tr(columns, data) {
-  
+  return (
+    <tr>{_.map(columns, (col) => (<td>{_.get(data, col.key || col.name)}</td>))}</tr>
+  );
 }
 
 export default class AdminList extends Component {
