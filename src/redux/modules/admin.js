@@ -1,6 +1,7 @@
 const LOAD_USERS = 'redux/admin/LOAD_USERS';
 const LOAD_USERS_SUCCESS = 'redux/admin/LOAD_USERS_SUCCESS';
 const LOAD_USERS_FAIL = 'redux/admin/LOAD_USERS_FAIL';
+const SELECT_USER = 'redux/admin/SELECT_USER';
 
 const initialState = {
   users: []
@@ -22,6 +23,11 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         error: action.error
       };
+    case SELECT_USER:
+      return {
+        ...state,
+        selectedUser: action.user
+      };
     default:
       return state;
   }
@@ -36,4 +42,8 @@ export function loadUsers() {
       }
     })
   };
+}
+
+export function selectUser(user) {
+  return { type: SELECT_USER, user };
 }
