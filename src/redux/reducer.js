@@ -6,6 +6,7 @@ import auth from './modules/auth';
 import notifs from './modules/notifs';
 import counter from './modules/counter';
 import info from './modules/info';
+import admin from './modules/admin'
 // import widgets from './modules/widgets';
 // import survey from './modules/survey';
 // import chat from './modules/chat';
@@ -18,6 +19,7 @@ export default function createReducers(asyncReducers) {
     form,
     notifs,
     auth,
+    admin,
     counter: multireducer({
       counter1: counter,
       counter2: counter,

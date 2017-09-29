@@ -54,7 +54,8 @@ export default class Login extends Component {
   };
 
   FacebookLoginButton = ({ facebookLogin }) => (
-    <button className="btn btn-primary" onClick={facebookLogin}>
+    <button className="btn btn-primary"
+            onClick={facebookLogin}>
       Login with <i className="fa fa-facebook-f" />
     </button>
   );
@@ -66,7 +67,8 @@ export default class Login extends Component {
         <Helmet title="Login" />
         <h1>Login</h1>
         {!user && <div>
-          <LoginForm onSubmit={this.login} onForgotPassword={this.forgotPassword} />
+          <LoginForm onSubmit={this.login}
+                     onForgotPassword={this.forgotPassword} />
           <p>This will "log you in" as this user, storing the username in the session of the API server.</p>
           <FacebookLogin
             appId="635147529978862"
@@ -81,7 +83,9 @@ export default class Login extends Component {
           <p>You are currently logged in as {user.email}.</p>
 
           <div>
-            <button className="btn btn-danger" onClick={logout}><i className="fa fa-sign-out" />{' '}Log Out</button>
+            <button className="btn btn-danger"
+                    onClick={logout}><i className="fa fa-sign-out" />{' '}Log Out
+            </button>
           </div>
         </div>
         }

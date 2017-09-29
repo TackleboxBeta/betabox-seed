@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import Alert from 'react-bootstrap/lib/Alert';
 import Helmet from 'react-helmet';
+import cn from 'classnames';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
 import { Notifs } from 'components';
@@ -52,7 +54,13 @@ export default class App extends Component {
   componentWillReceiveProps(nextProps) {
     if (!this.props.user && nextProps.user) {
       // login
-      const redirect = this.props.router.location.query && this.props.router.location.query.redirect;
+      const redirect = (() => {
+        if (_.get(nextProps.user, 'tempPassword')) {
+          return '/temppasswordforcechange';
+        } else {
+          return this.props.router.location.query && this.props.router.location.query.redirect;
+        }
+      });
       this.props.pushState(redirect || '/loginSuccess');
     } else if (this.props.user && !nextProps.user) {
       // logout
@@ -78,7 +86,7 @@ export default class App extends Component {
             />
           </div>}
 
-          <div className={styles.pageContainer}>
+          <div className={cn('container-fluid', styles.pageContainer)}>
             {children}
           </div>
         </div>

@@ -46,6 +46,7 @@ export default store => {
       */}
       <Route {...permissionsComponent(isAuthenticated)()}>
         <Route path="loginSuccess" getComponent={() => System.import('./containers/LoginSuccess/LoginSuccess')} />
+        <Route path="temppasswordforcechange" getComponent={() => System.import('./containers/TempPasswordForceChange/TempPasswordForceChange')} />
         <Route
           path="chatFeathers"
           getComponent={() => injectReducerAndRender(
@@ -55,6 +56,11 @@ export default store => {
         />
       </Route>
 
+      {/* Admin Routes */}
+      <Route {...permissionsComponent(isAuthenticated)()}>
+        <Route path="admin/userAdmin" getComponent={() => System.import('./containers/admin/UserAdmin/UserAdmin')} />
+      </Route>
+
       {/* Routes disallow login */}
       <Route {...permissionsComponent(isNotAuthenticated)()}>
         <Route path="register" getComponent={() => System.import('./containers/Register/Register')} />
@@ -62,7 +68,7 @@ export default store => {
 
       {/* Routes */}
       <Route path="login" getComponent={() => System.import('./containers/Login/Login')} />
-      <Route path="forgotpassword" getComponent={() => System.import('./containers/ForgotPassword/ForgotPassword')} />
+      <Route path="forgotPassword" getComponent={() => System.import('./containers/ForgotPassword/ForgotPassword')} />
       <Route path="about" getComponent={() => System.import('./containers/About/About')} />
       <Route
         path="survey"

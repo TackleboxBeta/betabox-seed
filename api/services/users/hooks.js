@@ -5,6 +5,7 @@ import { restrictToOwner } from 'feathers-authentication-hooks';
 import errors from 'feathers-errors';
 import { validateHook } from 'hooks';
 import { required, email, match, unique } from 'utils/validation';
+import { hashPassword } from '../../utils/crypto';
 
 const schemaValidator = {
   email: [required, email, unique('email')],
@@ -28,7 +29,9 @@ const userHooks = {
     create: [
       validate(),
       discard('password_confirmation'),
-      local.hooks.hashPassword()
+      local.hooks.hashPassword({
+        hash: hashPassword
+      })
     ],
     update: [
       auth.hooks.authenticate('jwt'),
